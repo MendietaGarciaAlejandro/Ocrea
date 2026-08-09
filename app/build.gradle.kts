@@ -35,6 +35,10 @@ android {
         targetCompatibility = JavaVersion.VERSION_11
     }
 
+    testOptions {
+        unitTests.isIncludeAndroidResources = true
+    }
+
     buildFeatures {
         compose = true
         // Hace falta para leer BuildConfig.DEBUG y ajustar el nivel de logs de red.
@@ -83,6 +87,11 @@ dependencies {
     testImplementation(libs.kotlinx.coroutines.test)
     testImplementation(libs.turbine)
     testImplementation(libs.androidx.paging.common)
+    testImplementation(libs.androidx.paging.testing)
+    testImplementation(libs.androidx.room.testing)
+    // Room necesita el runtime de Android; Robolectric lo simula en la JVM y evita
+    // tener que levantar un emulador para probar la capa de datos.
+    testImplementation(libs.robolectric)
 
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)

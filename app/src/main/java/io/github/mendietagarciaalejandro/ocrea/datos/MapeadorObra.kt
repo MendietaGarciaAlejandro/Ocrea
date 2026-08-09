@@ -1,5 +1,6 @@
 package io.github.mendietagarciaalejandro.ocrea.datos
 
+import io.github.mendietagarciaalejandro.ocrea.datos.local.ObraEntidad
 import io.github.mendietagarciaalejandro.ocrea.datos.remoto.dto.ObraDto
 import io.github.mendietagarciaalejandro.ocrea.dominio.Obra
 
@@ -20,6 +21,40 @@ fun ObraDto.aDominio(): Obra = Obra(
 )
 
 fun List<ObraDto>.aDominio(): List<Obra> = map { it.aDominio() }
+
+/** El [orden] es la posición global con la que llegó la obra, no viene de la API. */
+fun ObraDto.aEntidad(orden: Int): ObraEntidad = ObraEntidad(
+    id = id,
+    orden = orden,
+    titulo = titulo,
+    artista = artista?.enBlancoANulo(),
+    fecha = fecha?.enBlancoANulo(),
+    imagenId = imagenId?.enBlancoANulo(),
+    tecnica = tecnica?.enBlancoANulo(),
+    origen = origen?.enBlancoANulo(),
+    dimensiones = dimensiones?.enBlancoANulo(),
+    descripcion = descripcion?.aTextoPlano()?.enBlancoANulo(),
+    creditos = creditos?.enBlancoANulo(),
+    tipo = tipo?.enBlancoANulo(),
+    departamento = departamento?.enBlancoANulo(),
+    esDominioPublico = esDominioPublico,
+)
+
+fun ObraEntidad.aDominio(): Obra = Obra(
+    id = id,
+    titulo = titulo,
+    artista = artista,
+    fecha = fecha,
+    imagenId = imagenId,
+    tecnica = tecnica,
+    origen = origen,
+    dimensiones = dimensiones,
+    descripcion = descripcion,
+    creditos = creditos,
+    tipo = tipo,
+    departamento = departamento,
+    esDominioPublico = esDominioPublico,
+)
 
 /** La API a veces manda cadenas vacías donde deberia mandar null. */
 private fun String.enBlancoANulo(): String? = trim().takeIf { it.isNotEmpty() }
