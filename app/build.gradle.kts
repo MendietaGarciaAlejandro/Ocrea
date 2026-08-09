@@ -35,6 +35,12 @@ android {
         targetCompatibility = JavaVersion.VERSION_11
     }
 
+    sourceSets {
+        // Los tests de migración leen los esquemas exportados desde los assets.
+        getByName("test") { assets.srcDirs(files("$projectDir/schemas")) }
+        getByName("androidTest") { assets.srcDirs(files("$projectDir/schemas")) }
+    }
+
     testOptions {
         unitTests.isIncludeAndroidResources = true
     }
@@ -104,6 +110,7 @@ dependencies {
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.room.testing)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
     debugImplementation(libs.androidx.compose.ui.tooling)
 }

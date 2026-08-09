@@ -7,6 +7,12 @@
     <string name="limpiar_busqueda">Limpiar búsqueda</string>
     <string name="busqueda_sin_resultados">No se ha encontrado nada para «%1$s».</string>
 
+    <string name="favoritos_titulo">Favoritos</string>
+    <string name="favoritos_vacio">Todavía no has guardado ninguna obra.\n\nDesde el detalle de cualquier obra puedes añadirla aquí y consultarla luego sin conexión.</string>
+    <string name="abrir_favoritos">Ver favoritos</string>
+    <string name="anadir_a_favoritos">Añadir a favoritos</string>
+    <string name="quitar_de_favoritos">Quitar de favoritos</string>
+
     <string name="detalle_titulo">Obra</string>
     <string name="volver">Volver</string>
 

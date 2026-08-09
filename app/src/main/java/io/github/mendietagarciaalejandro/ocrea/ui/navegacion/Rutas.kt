@@ -10,4 +10,7 @@ import kotlinx.serialization.Serializable
 data object Catalogo
 
 @Serializable
+data object Favoritos
+
+@Serializable
 data class Detalle(val obraId: Int)

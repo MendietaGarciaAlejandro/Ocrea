@@ -9,6 +9,8 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
@@ -41,6 +43,7 @@ fun PantallaDetalle(
     viewModel: DetalleViewModel = hiltViewModel(),
 ) {
     val estado by viewModel.estado.collectAsStateWithLifecycle()
+    val esFavorita by viewModel.esFavorita.collectAsStateWithLifecycle()
 
     val titulo = when (val actual = estado) {
         is EstadoDetalle.Contenido -> actual.obra.titulo
@@ -58,6 +61,28 @@ fun PantallaDetalle(
                             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                             contentDescription = stringResource(R.string.volver),
                         )
+                    }
+                },
+                actions = {
+                    // Solo tiene sentido guardar algo que ya se ha podido cargar.
+                    if (estado is EstadoDetalle.Contenido) {
+                        IconButton(onClick = viewModel::alternarFavorito) {
+                            Icon(
+                                imageVector = if (esFavorita) {
+                                    Icons.Filled.Favorite
+                                } else {
+                                    Icons.Filled.FavoriteBorder
+                                },
+                                contentDescription = stringResource(
+                                    if (esFavorita) {
+                                        R.string.quitar_de_favoritos
+                                    } else {
+                                        R.string.anadir_a_favoritos
+                                    },
+                                ),
+                                tint = MaterialTheme.colorScheme.primary,
+                            )
+                        }
                     }
                 },
             )

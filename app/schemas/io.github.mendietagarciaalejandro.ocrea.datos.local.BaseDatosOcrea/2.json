@@ -1,0 +1,213 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 2,
+    "identityHash": "cb561fb0ddf8d3b647254a6f15af283c",
+    "entities": [
+      {
+        "tableName": "obras",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `orden` INTEGER NOT NULL, `titulo` TEXT NOT NULL, `artista` TEXT, `fecha` TEXT, `imagenId` TEXT, `tecnica` TEXT, `origen` TEXT, `dimensiones` TEXT, `descripcion` TEXT, `creditos` TEXT, `tipo` TEXT, `departamento` TEXT, `esDominioPublico` INTEGER NOT NULL, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "orden",
+            "columnName": "orden",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "titulo",
+            "columnName": "titulo",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "artista",
+            "columnName": "artista",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "fecha",
+            "columnName": "fecha",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "imagenId",
+            "columnName": "imagenId",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "tecnica",
+            "columnName": "tecnica",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "origen",
+            "columnName": "origen",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "dimensiones",
+            "columnName": "dimensiones",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "descripcion",
+            "columnName": "descripcion",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "creditos",
+            "columnName": "creditos",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "tipo",
+            "columnName": "tipo",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "departamento",
+            "columnName": "departamento",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "esDominioPublico",
+            "columnName": "esDominioPublico",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id"
+          ]
+        }
+      },
+      {
+        "tableName": "claves_remotas",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`obraId` INTEGER NOT NULL, `paginaAnterior` INTEGER, `paginaSiguiente` INTEGER, PRIMARY KEY(`obraId`))",
+        "fields": [
+          {
+            "fieldPath": "obraId",
+            "columnName": "obraId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "paginaAnterior",
+            "columnName": "paginaAnterior",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "paginaSiguiente",
+            "columnName": "paginaSiguiente",
+            "affinity": "INTEGER"
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "obraId"
+          ]
+        }
+      },
+      {
+        "tableName": "favoritos",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `guardadaEn` INTEGER NOT NULL, `titulo` TEXT NOT NULL, `artista` TEXT, `fecha` TEXT, `imagenId` TEXT, `tecnica` TEXT, `origen` TEXT, `dimensiones` TEXT, `descripcion` TEXT, `creditos` TEXT, `tipo` TEXT, `departamento` TEXT, `esDominioPublico` INTEGER NOT NULL, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "guardadaEn",
+            "columnName": "guardadaEn",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "titulo",
+            "columnName": "titulo",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "artista",
+            "columnName": "artista",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "fecha",
+            "columnName": "fecha",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "imagenId",
+            "columnName": "imagenId",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "tecnica",
+            "columnName": "tecnica",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "origen",
+            "columnName": "origen",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "dimensiones",
+            "columnName": "dimensiones",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "descripcion",
+            "columnName": "descripcion",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "creditos",
+            "columnName": "creditos",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "tipo",
+            "columnName": "tipo",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "departamento",
+            "columnName": "departamento",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "esDominioPublico",
+            "columnName": "esDominioPublico",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id"
+          ]
+        }
+      }
+    ],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'cb561fb0ddf8d3b647254a6f15af283c')"
+    ]
+  }
+}
