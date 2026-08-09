@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  Trazo de ocre que se cierra casi del todo: hace de "O" de Ocrea y de pincelada.
-  Todo queda dentro de los 66dp centrales, que es la zona segura de un icono adaptativo:
-  fuera de ahí, las máscaras redondas de algunos lanzadores recortarían el dibujo.
+  Icono de la pantalla de arranque: el mismo trazo del lanzador, pero en el lienzo de
+  108x108 que espera la API de SplashScreen (el dibujo ocupa el tercio central).
 -->
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:width="108dp"
@@ -16,7 +15,6 @@
         android:strokeWidth="13"
         android:strokeLineCap="round" />
 
-    <!-- La carga de pigmento donde arranca la pincelada. -->
     <path
         android:fillColor="#E8C39E"
         android:pathData="M54,30m-6.5,0a6.5,6.5 0 1,0 13,0a6.5,6.5 0 1,0 -13,0" />

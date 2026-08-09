@@ -48,20 +48,25 @@ class ApiArticFalsa(
     }
 
     /** Consultas recibidas, para comprobar que el debounce filtra lo que debe. */
-    val busquedas = mutableListOf<String>()
+    val busquedas = mutableListOf<String?>()
+
+    /** Filtros recibidos en la ultima busqueda. */
+    var ultimosFiltros: Map<String, String> = emptyMap()
 
     /** Cuántas obras devuelve una búsqueda; por defecto, las mismas que el catálogo. */
     var resultadosBusqueda: Int? = null
 
     override suspend fun buscarObras(
-        consulta: String,
+        consulta: String?,
         pagina: Int,
         limite: Int,
+        filtros: Map<String, String>,
         campos: String,
     ): RespuestaObrasDto {
         if (fallarConError) throw IOException("sin conexión")
 
         busquedas += consulta
+        ultimosFiltros = filtros
 
         val total = resultadosBusqueda ?: totalObras
         val desde = (pagina - 1) * limite
@@ -70,7 +75,7 @@ class ApiArticFalsa(
             emptyList()
         } else {
             (desde until hasta).map { indice ->
-                ObraDto(id = indice + 1, titulo = "$consulta ${indice + 1}")
+                ObraDto(id = indice + 1, titulo = "${consulta ?: "obra"} ${indice + 1}")
             }
         }
 

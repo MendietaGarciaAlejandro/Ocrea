@@ -8,6 +8,7 @@ import androidx.navigation.compose.rememberNavController
 import io.github.mendietagarciaalejandro.ocrea.ui.catalogo.PantallaCatalogo
 import io.github.mendietagarciaalejandro.ocrea.ui.detalle.PantallaDetalle
 import io.github.mendietagarciaalejandro.ocrea.ui.favoritos.PantallaFavoritos
+import io.github.mendietagarciaalejandro.ocrea.ui.sobre.PantallaSobre
 
 @Composable
 fun NavegacionOcrea(modifier: Modifier = Modifier) {
@@ -22,6 +23,7 @@ fun NavegacionOcrea(modifier: Modifier = Modifier) {
             PantallaCatalogo(
                 onAbrirObra = { id -> navegador.navigate(Detalle(id)) },
                 onAbrirFavoritos = { navegador.navigate(Favoritos) },
+                onAbrirSobre = { navegador.navigate(Sobre) },
             )
         }
 
@@ -30,6 +32,10 @@ fun NavegacionOcrea(modifier: Modifier = Modifier) {
                 onAbrirObra = { id -> navegador.navigate(Detalle(id)) },
                 onVolver = navegador::popBackStack,
             )
+        }
+
+        composable<Sobre> {
+            PantallaSobre(onVolver = navegador::popBackStack)
         }
 
         composable<Detalle> {

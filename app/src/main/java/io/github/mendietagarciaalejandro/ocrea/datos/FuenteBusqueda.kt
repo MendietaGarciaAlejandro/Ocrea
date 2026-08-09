@@ -3,6 +3,8 @@ package io.github.mendietagarciaalejandro.ocrea.datos
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import io.github.mendietagarciaalejandro.ocrea.datos.remoto.ApiArtic
+import io.github.mendietagarciaalejandro.ocrea.datos.remoto.ConsultaBusqueda
+import io.github.mendietagarciaalejandro.ocrea.dominio.FiltrosBusqueda
 import io.github.mendietagarciaalejandro.ocrea.dominio.Obra
 import retrofit2.HttpException
 import java.io.IOException
@@ -15,7 +17,7 @@ import java.io.IOException
  */
 class FuenteBusqueda(
     private val api: ApiArtic,
-    private val consulta: String,
+    private val filtros: FiltrosBusqueda,
 ) : PagingSource<Int, Obra>() {
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Obra> {
@@ -23,9 +25,10 @@ class FuenteBusqueda(
 
         return try {
             val respuesta = api.buscarObras(
-                consulta = consulta,
+                consulta = filtros.texto.trim().takeIf { filtros.hayTexto },
                 pagina = pagina,
                 limite = params.loadSize,
+                filtros = ConsultaBusqueda.parametros(filtros),
             )
 
             val esUltima = pagina >= respuesta.paginacion.totalPaginas ||

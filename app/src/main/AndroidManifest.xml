@@ -18,7 +18,7 @@
             android:name=".ActividadPrincipal"
             android:exported="true"
             android:label="@string/app_name"
-            android:theme="@style/Theme.Ocrea"
+            android:theme="@style/Theme.Ocrea.Arranque"
             android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

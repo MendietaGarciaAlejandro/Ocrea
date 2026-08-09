@@ -6,12 +6,47 @@
     <string name="buscar">Buscar por autor, título o época</string>
     <string name="limpiar_busqueda">Limpiar búsqueda</string>
     <string name="busqueda_sin_resultados">No se ha encontrado nada para «%1$s».</string>
+    <string name="busqueda_sin_resultados_filtros">Ninguna obra cumple los filtros elegidos.</string>
+
+    <string name="filtros">Filtros</string>
+    <string name="filtros_con_cuenta">Filtros (%1$d)</string>
+    <string name="filtro_artista">Autor</string>
+    <string name="filtro_departamento">Departamento</string>
+    <string name="filtro_epoca">Época</string>
+    <string name="filtro_desde">Desde</string>
+    <string name="filtro_hasta">Hasta</string>
+    <string name="filtro_cualquiera">Cualquiera</string>
+    <string name="limpiar_filtros">Quitar filtros</string>
+    <string name="anio_invalido">Los años deben ir de menor a mayor.</string>
+
+    <string name="departamento_pintura_europa">Pintura y escultura de Europa</string>
+    <string name="departamento_contemporaneo">Arte contemporáneo</string>
+    <string name="departamento_americas">Arte de las Américas</string>
+    <string name="departamento_asia">Arte de Asia</string>
+    <string name="departamento_africa">Arte de África</string>
+    <string name="departamento_grabados">Grabados y dibujos</string>
+    <string name="departamento_fotografia">Fotografía y medios</string>
+    <string name="departamento_textil">Textiles</string>
+    <string name="departamento_aplicado">Artes aplicadas de Europa</string>
+    <string name="departamento_arquitectura">Arquitectura y diseño</string>
 
     <string name="favoritos_titulo">Favoritos</string>
     <string name="favoritos_vacio">Todavía no has guardado ninguna obra.\n\nDesde el detalle de cualquier obra puedes añadirla aquí y consultarla luego sin conexión.</string>
     <string name="abrir_favoritos">Ver favoritos</string>
     <string name="anadir_a_favoritos">Añadir a favoritos</string>
     <string name="quitar_de_favoritos">Quitar de favoritos</string>
+
+    <string name="sobre_titulo">Sobre Ocrea</string>
+    <string name="abrir_sobre">Sobre la app</string>
+    <string name="sobre_que_es_titulo">Qué es</string>
+    <string name="sobre_que_es">Ocrea es un visor de la colección del Art Institute of Chicago: unas 130.000 obras que se pueden recorrer, buscar por autor, época o departamento, y guardar como favoritas para consultarlas luego sin conexión.\n\nEl nombre viene del ocre, el pigmento con el que se pintaron las primeras imágenes que conservamos.</string>
+    <string name="sobre_datos_titulo">De dónde salen los datos</string>
+    <string name="sobre_datos">Toda la información y las imágenes proceden de la API pública del Art Institute of Chicago. Ocrea no aloja ninguna obra: las pide a los servidores del museo cada vez.\n\nLos datos del catálogo se publican bajo Creative Commons Zero (CC0). Los textos descriptivos de cada obra son del museo y están bajo Creative Commons Reconocimiento 4.0 (CC BY).</string>
+    <string name="sobre_datos_enlace">api.artic.edu</string>
+    <string name="sobre_autoria_titulo">Quién la ha hecho</string>
+    <string name="sobre_autoria">Alejandro Mendieta García.\n\nProyecto personal, sin ánimo de lucro y sin relación con el museo. Está hecho para practicar Jetpack Compose y la paginación con caché local, así que el código es público.</string>
+    <string name="sobre_codigo">Código en GitHub</string>
+    <string name="sobre_version">Versión %1$s</string>
 
     <string name="detalle_titulo">Obra</string>
     <string name="volver">Volver</string>

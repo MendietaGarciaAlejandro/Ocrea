@@ -1,6 +1,7 @@
 package io.github.mendietagarciaalejandro.ocrea.datos
 
 import androidx.paging.PagingSource
+import io.github.mendietagarciaalejandro.ocrea.dominio.FiltrosBusqueda
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
@@ -21,7 +22,7 @@ class FuenteBusquedaTest {
     @Test
     fun `la primera pagina no tiene anterior`() = runTest {
         val api = ApiArticFalsa(totalObras = 75)
-        val fuente = FuenteBusqueda(api, "monet")
+        val fuente = FuenteBusqueda(api, FiltrosBusqueda(texto = "monet"))
 
         val resultado = cargar(fuente, null) as PagingSource.LoadResult.Page
 
@@ -34,7 +35,7 @@ class FuenteBusquedaTest {
     @Test
     fun `la ultima pagina no tiene siguiente`() = runTest {
         val api = ApiArticFalsa(totalObras = 75)
-        val fuente = FuenteBusqueda(api, "monet")
+        val fuente = FuenteBusqueda(api, FiltrosBusqueda(texto = "monet"))
 
         val resultado = cargar(fuente, 3) as PagingSource.LoadResult.Page
 
@@ -46,7 +47,7 @@ class FuenteBusquedaTest {
     @Test
     fun `una busqueda sin resultados devuelve pagina vacia y sin continuacion`() = runTest {
         val api = ApiArticFalsa(totalObras = 75).apply { resultadosBusqueda = 0 }
-        val fuente = FuenteBusqueda(api, "asdfghjkl")
+        val fuente = FuenteBusqueda(api, FiltrosBusqueda(texto = "asdfghjkl"))
 
         val resultado = cargar(fuente, null) as PagingSource.LoadResult.Page
 
@@ -58,7 +59,7 @@ class FuenteBusquedaTest {
     fun `no se pasa del tope de diez mil resultados que impone la api`() = runTest {
         // Con paginas de 100, la 100 ya alcanza el tope: no debe pedirse la siguiente.
         val api = ApiArticFalsa(totalObras = 500_000)
-        val fuente = FuenteBusqueda(api, "arte")
+        val fuente = FuenteBusqueda(api, FiltrosBusqueda(texto = "arte"))
 
         val resultado = cargar(fuente, 100, tamano = 100) as PagingSource.LoadResult.Page
 
@@ -68,7 +69,7 @@ class FuenteBusquedaTest {
     @Test
     fun `antes del tope si hay pagina siguiente`() = runTest {
         val api = ApiArticFalsa(totalObras = 500_000)
-        val fuente = FuenteBusqueda(api, "arte")
+        val fuente = FuenteBusqueda(api, FiltrosBusqueda(texto = "arte"))
 
         val resultado = cargar(fuente, 50, tamano = 100) as PagingSource.LoadResult.Page
 
@@ -78,7 +79,7 @@ class FuenteBusquedaTest {
     @Test
     fun `un fallo de red se propaga como error de paginacion`() = runTest {
         val api = ApiArticFalsa().apply { fallarConError = true }
-        val fuente = FuenteBusqueda(api, "monet")
+        val fuente = FuenteBusqueda(api, FiltrosBusqueda(texto = "monet"))
 
         val resultado = cargar(fuente, null)
 
@@ -89,7 +90,7 @@ class FuenteBusquedaTest {
     @Test
     fun `los resultados llegan ya como modelo de dominio`() = runTest {
         val api = ApiArticFalsa(totalObras = 5)
-        val fuente = FuenteBusqueda(api, "monet")
+        val fuente = FuenteBusqueda(api, FiltrosBusqueda(texto = "monet"))
 
         val resultado = cargar(fuente, null) as PagingSource.LoadResult.Page
 

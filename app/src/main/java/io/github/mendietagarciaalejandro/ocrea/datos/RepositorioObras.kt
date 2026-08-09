@@ -7,6 +7,7 @@ import androidx.paging.PagingData
 import androidx.paging.map
 import io.github.mendietagarciaalejandro.ocrea.datos.local.BaseDatosOcrea
 import io.github.mendietagarciaalejandro.ocrea.datos.remoto.ApiArtic
+import io.github.mendietagarciaalejandro.ocrea.dominio.FiltrosBusqueda
 import io.github.mendietagarciaalejandro.ocrea.dominio.Obra
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -41,14 +42,14 @@ class RepositorioObras @Inject constructor(
      * Resultados de búsqueda. No se guardan en local: son transitorios y mezclarlos con
      * el catálogo estropearía la caché que da el modo sin conexión.
      */
-    fun buscar(consulta: String): Flow<PagingData<Obra>> = Pager(
+    fun buscar(filtros: FiltrosBusqueda): Flow<PagingData<Obra>> = Pager(
         config = PagingConfig(
             pageSize = TAMANO_PAGINA,
             initialLoadSize = TAMANO_PAGINA,
             prefetchDistance = 10,
             enablePlaceholders = false,
         ),
-        pagingSourceFactory = { FuenteBusqueda(api, consulta) },
+        pagingSourceFactory = { FuenteBusqueda(api, filtros) },
     ).flow
 
     /**

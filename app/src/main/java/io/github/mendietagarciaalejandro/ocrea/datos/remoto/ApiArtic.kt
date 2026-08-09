@@ -5,6 +5,7 @@ import io.github.mendietagarciaalejandro.ocrea.datos.remoto.dto.RespuestaObrasDt
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
+import retrofit2.http.QueryMap
 
 /**
  * API publica del Art Institute of Chicago.
@@ -22,11 +23,16 @@ interface ApiArtic {
         @Query("fields") campos: String = CAMPOS_LISTADO,
     ): RespuestaObrasDto
 
+    /**
+     * Los filtros por artista, departamento o año viajan en [filtros] con la notación de
+     * corchetes de Elasticsearch. Puede ir vacío si solo se busca por texto.
+     */
     @GET("artworks/search")
     suspend fun buscarObras(
-        @Query("q") consulta: String,
+        @Query("q") consulta: String?,
         @Query("page") pagina: Int,
         @Query("limit") limite: Int,
+        @QueryMap filtros: Map<String, String> = emptyMap(),
         @Query("fields") campos: String = CAMPOS_LISTADO,
     ): RespuestaObrasDto
 

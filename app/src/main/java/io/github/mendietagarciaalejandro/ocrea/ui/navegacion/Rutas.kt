@@ -13,4 +13,7 @@ data object Catalogo
 data object Favoritos
 
 @Serializable
+data object Sobre
+
+@Serializable
 data class Detalle(val obraId: Int)
