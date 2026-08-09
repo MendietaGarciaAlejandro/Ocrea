@@ -1,8 +1,8 @@
 # Ocrea
 
 App Android para explorar la colección del Art Institute of Chicago. Son unas 130.000
-obras, con buscador por texto, filtros por autor, época y departamento, ficha de cada pieza
-y favoritos que se pueden consultar sin conexión.
+obras, con buscador por texto, filtros por autor, época y departamento, ficha de cada pieza,
+visor con zoom para mirarlas de cerca y favoritos que se pueden consultar sin conexión.
 
 La API la elegí precisamente por eso, porque tiene volumen de verdad. Con veinte resultados
 de prueba cualquier cosa parece que funciona; con 130.000 y un límite de 60 peticiones por
@@ -103,6 +103,17 @@ los esquemas versionados en `app/schemas` para poder comprobarla.
 La búsqueda espera 350 ms desde la última tecla y descarta consultas de una sola letra. Lo
 medí en el móvil: escribir "monet" letra a letra genera **una** petición. Sin eso serían
 cuatro, y con el tope de 60 por minuto que pone el museo se nota.
+
+### El visor pide el doble de resolución que el detalle
+
+La ficha de la obra usa los 843 píxeles de ancho que recomienda el museo, porque a ese
+tamaño sirven la imagen ya cacheada. Para el visor con zoom se queda corto: al acercarse
+se ve el pixelado antes que la pincelada, así que ahí se piden 1686. Solo se paga esa
+descarga si el usuario abre el visor.
+
+El fondo del visor es negro y no sigue al tema, a diferencia del resto de la app. Es lo que
+hacen todos los visores de imágenes y aquí importa más de lo normal: un marco claro compite
+con los colores del cuadro.
 
 ### Sin Material You
 

@@ -1,5 +1,6 @@
 package io.github.mendietagarciaalejandro.ocrea.ui.detalle
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -39,6 +40,7 @@ import io.github.mendietagarciaalejandro.ocrea.ui.comun.ImagenObra
 @Composable
 fun PantallaDetalle(
     onVolver: () -> Unit,
+    onAbrirImagen: (imagenId: String, titulo: String) -> Unit,
     modifier: Modifier = Modifier,
     viewModel: DetalleViewModel = hiltViewModel(),
 ) {
@@ -99,6 +101,7 @@ fun PantallaDetalle(
 
             is EstadoDetalle.Contenido -> ContenidoObra(
                 obra = actual.obra,
+                onAbrirImagen = onAbrirImagen,
                 modifier = Modifier.padding(relleno),
             )
         }
@@ -106,17 +109,37 @@ fun PantallaDetalle(
 }
 
 @Composable
-private fun ContenidoObra(obra: Obra, modifier: Modifier = Modifier) {
+private fun ContenidoObra(
+    obra: Obra,
+    onAbrirImagen: (imagenId: String, titulo: String) -> Unit,
+    modifier: Modifier = Modifier,
+) {
     Column(
         modifier = modifier
             .fillMaxSize()
             .verticalScroll(rememberScrollState()),
     ) {
+        // Solo se puede ampliar lo que tiene imagen: en las obras sin digitalizar el
+        // hueco no lleva a ninguna parte.
+        val imagenId = obra.imagenId
+
         ImagenObra(
             url = obra.urlImagen(ImagenesIiif.ANCHO_DETALLE),
-            descripcion = obra.titulo,
+            descripcion = if (imagenId != null) {
+                stringResource(R.string.visor_abrir)
+            } else {
+                obra.titulo
+            },
             escala = ContentScale.FillWidth,
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .then(
+                    if (imagenId != null) {
+                        Modifier.clickable { onAbrirImagen(imagenId, obra.titulo) }
+                    } else {
+                        Modifier
+                    },
+                ),
         )
 
         Column(modifier = Modifier.padding(16.dp)) {

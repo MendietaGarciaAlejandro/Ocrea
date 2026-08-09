@@ -36,6 +36,10 @@
     <string name="anadir_a_favoritos">Añadir a favoritos</string>
     <string name="quitar_de_favoritos">Quitar de favoritos</string>
 
+    <string name="visor_abrir">Ver la obra a pantalla completa</string>
+    <string name="visor_cerrar">Cerrar</string>
+    <string name="visor_restablecer">Restablecer el zoom</string>
+
     <string name="sobre_titulo">Sobre Ocrea</string>
     <string name="abrir_sobre">Sobre la app</string>
     <string name="sobre_que_es_titulo">Qué es</string>

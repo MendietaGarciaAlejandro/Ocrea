@@ -19,6 +19,12 @@ object ImagenesIiif {
      */
     const val ANCHO_DETALLE = 843
 
+    /**
+     * Para el visor con zoom hace falta más resolución: con los 843 del detalle, al
+     * acercarse se ve el pixelado antes que la pincelada.
+     */
+    const val ANCHO_VISOR = 1686
+
     fun url(imagenId: String, ancho: Int): String =
         "$BASE/$imagenId/full/$ancho,/0/default.jpg"
 }
