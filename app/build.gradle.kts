@@ -37,6 +37,8 @@ android {
 
     buildFeatures {
         compose = true
+        // Hace falta para leer BuildConfig.DEBUG y ajustar el nivel de logs de red.
+        buildConfig = true
     }
 }
 
