@@ -1,6 +1,7 @@
 package io.github.mendietagarciaalejandro.ocrea.datos
 
 import io.github.mendietagarciaalejandro.ocrea.datos.local.ObraEntidad
+import io.github.mendietagarciaalejandro.ocrea.datos.local.ObraFavoritaEntidad
 import io.github.mendietagarciaalejandro.ocrea.datos.remoto.dto.ObraDto
 import io.github.mendietagarciaalejandro.ocrea.dominio.Obra
 
@@ -37,6 +38,39 @@ fun ObraDto.aEntidad(orden: Int): ObraEntidad = ObraEntidad(
     creditos = creditos?.enBlancoANulo(),
     tipo = tipo?.enBlancoANulo(),
     departamento = departamento?.enBlancoANulo(),
+    esDominioPublico = esDominioPublico,
+)
+
+fun Obra.aFavorita(guardadaEn: Long): ObraFavoritaEntidad = ObraFavoritaEntidad(
+    id = id,
+    guardadaEn = guardadaEn,
+    titulo = titulo,
+    artista = artista,
+    fecha = fecha,
+    imagenId = imagenId,
+    tecnica = tecnica,
+    origen = origen,
+    dimensiones = dimensiones,
+    descripcion = descripcion,
+    creditos = creditos,
+    tipo = tipo,
+    departamento = departamento,
+    esDominioPublico = esDominioPublico,
+)
+
+fun ObraFavoritaEntidad.aDominio(): Obra = Obra(
+    id = id,
+    titulo = titulo,
+    artista = artista,
+    fecha = fecha,
+    imagenId = imagenId,
+    tecnica = tecnica,
+    origen = origen,
+    dimensiones = dimensiones,
+    descripcion = descripcion,
+    creditos = creditos,
+    tipo = tipo,
+    departamento = departamento,
     esDominioPublico = esDominioPublico,
 )
 

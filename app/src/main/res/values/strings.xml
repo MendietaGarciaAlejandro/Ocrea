@@ -1,3 +1,29 @@
 <resources>
     <string name="app_name">Ocrea</string>
+
+    <string name="catalogo_titulo">Colección</string>
+    <string name="catalogo_vacio">No hay obras que mostrar.</string>
+    <string name="buscar">Buscar por autor, título o época</string>
+    <string name="limpiar_busqueda">Limpiar búsqueda</string>
+    <string name="busqueda_sin_resultados">No se ha encontrado nada para «%1$s».</string>
+
+    <string name="detalle_titulo">Obra</string>
+    <string name="volver">Volver</string>
+
+    <string name="autor_desconocido">Autor desconocido</string>
+    <string name="sin_imagen">Sin imagen disponible</string>
+
+    <string name="error_carga">No se han podido cargar las obras.</string>
+    <string name="error_sin_conexion">Parece que no hay conexión.</string>
+    <string name="reintentar">Reintentar</string>
+
+    <string name="ficha_tecnica">Ficha técnica</string>
+    <string name="ficha_fecha">Fecha</string>
+    <string name="ficha_tecnica_material">Técnica</string>
+    <string name="ficha_origen">Origen</string>
+    <string name="ficha_dimensiones">Dimensiones</string>
+    <string name="ficha_tipo">Tipo</string>
+    <string name="ficha_departamento">Departamento</string>
+    <string name="ficha_creditos">Créditos</string>
+    <string name="dominio_publico">Dominio público</string>
 </resources>

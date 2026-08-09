@@ -38,6 +38,20 @@ class RepositorioObras @Inject constructor(
     ).flow.map { pagina -> pagina.map { it.aDominio() } }
 
     /**
+     * Resultados de búsqueda. No se guardan en local: son transitorios y mezclarlos con
+     * el catálogo estropearía la caché que da el modo sin conexión.
+     */
+    fun buscar(consulta: String): Flow<PagingData<Obra>> = Pager(
+        config = PagingConfig(
+            pageSize = TAMANO_PAGINA,
+            initialLoadSize = TAMANO_PAGINA,
+            prefetchDistance = 10,
+            enablePlaceholders = false,
+        ),
+        pagingSourceFactory = { FuenteBusqueda(api, consulta) },
+    ).flow
+
+    /**
      * Detalle de una obra. Se pide a la API porque el listado solo trae cuatro campos,
      * y de paso se refresca la copia local.
      */

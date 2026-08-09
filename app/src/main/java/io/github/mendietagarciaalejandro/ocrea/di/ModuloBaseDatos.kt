@@ -9,6 +9,8 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import io.github.mendietagarciaalejandro.ocrea.datos.local.BaseDatosOcrea
 import io.github.mendietagarciaalejandro.ocrea.datos.local.ClaveRemotaDao
+import io.github.mendietagarciaalejandro.ocrea.datos.local.FavoritoDao
+import io.github.mendietagarciaalejandro.ocrea.datos.local.MIGRACION_1_2
 import io.github.mendietagarciaalejandro.ocrea.datos.local.ObraDao
 import javax.inject.Singleton
 
@@ -20,9 +22,9 @@ object ModuloBaseDatos {
     @Singleton
     fun proporcionarBaseDatos(@ApplicationContext contexto: Context): BaseDatosOcrea =
         Room.databaseBuilder(contexto, BaseDatosOcrea::class.java, BaseDatosOcrea.NOMBRE)
-            // El contenido es una caché de la API: si cambia el esquema, se descarta y
-            // se vuelve a bajar. No hay nada del usuario que perder todavía.
-            .fallbackToDestructiveMigration(dropAllTables = true)
+            // Nada de borrado destructivo: en esta base de datos ya hay favoritos del
+            // usuario, y esos no se pueden perder al actualizar la app.
+            .addMigrations(MIGRACION_1_2)
             .build()
 
     @Provides
@@ -31,4 +33,8 @@ object ModuloBaseDatos {
     @Provides
     fun proporcionarClaveRemotaDao(baseDatos: BaseDatosOcrea): ClaveRemotaDao =
         baseDatos.claveRemotaDao()
+
+    @Provides
+    fun proporcionarFavoritoDao(baseDatos: BaseDatosOcrea): FavoritoDao =
+        baseDatos.favoritoDao()
 }

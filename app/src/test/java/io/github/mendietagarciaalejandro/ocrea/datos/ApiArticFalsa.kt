@@ -47,12 +47,43 @@ class ApiArticFalsa(
         )
     }
 
+    /** Consultas recibidas, para comprobar que el debounce filtra lo que debe. */
+    val busquedas = mutableListOf<String>()
+
+    /** Cuántas obras devuelve una búsqueda; por defecto, las mismas que el catálogo. */
+    var resultadosBusqueda: Int? = null
+
     override suspend fun buscarObras(
         consulta: String,
         pagina: Int,
         limite: Int,
         campos: String,
-    ): RespuestaObrasDto = obtenerObras(pagina, limite, campos)
+    ): RespuestaObrasDto {
+        if (fallarConError) throw IOException("sin conexión")
+
+        busquedas += consulta
+
+        val total = resultadosBusqueda ?: totalObras
+        val desde = (pagina - 1) * limite
+        val hasta = minOf(desde + limite, total)
+        val obras = if (desde >= total) {
+            emptyList()
+        } else {
+            (desde until hasta).map { indice ->
+                ObraDto(id = indice + 1, titulo = "$consulta ${indice + 1}")
+            }
+        }
+
+        return RespuestaObrasDto(
+            paginacion = PaginacionDto(
+                total = total,
+                limite = limite,
+                paginaActual = pagina,
+                totalPaginas = if (total == 0) 0 else (total + limite - 1) / limite,
+            ),
+            obras = obras,
+        )
+    }
 
     override suspend fun obtenerObra(id: Int, campos: String): RespuestaObraDto =
         RespuestaObraDto(ObraDto(id = id, titulo = "Obra $id", imagenId = "img-$id"))
